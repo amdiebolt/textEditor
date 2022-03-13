@@ -27,6 +27,8 @@ warmStrategyCache({
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // TODO: Implement asset caching
+registerRoute(
+  ({ request }) => ['style', 'script', 'worker'].includes(request.destination),
 new StaleWhileRevalidate({
   // Name of the cache storage.
   cacheName: 'asset-cache',
@@ -36,5 +38,5 @@ new StaleWhileRevalidate({
       statuses: [0, 200],
     }),
   ],
-})
+}))
 registerRoute();
